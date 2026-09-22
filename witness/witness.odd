@@ -4,14 +4,14 @@
   <teiHeader>
     <fileDesc>
       <titleStmt>
-        <title>ODD test pour la modélisation : schéma spécifique aux éléments des tables witness + parts</title>
+        <title>ODD test pour la modélisation de l'entité witness</title>
         <author>Maud Mélinand</author>
       </titleStmt>
       <publicationStmt>
         <p/>
       </publicationStmt>
       <sourceDesc>
-        <p>Document conforme aux guidelines de la TEI-P5</p>
+        <p>Document conforme aux guidelines de la TEI-P5.</p>
       </sourceDesc>
     </fileDesc>
   </teiHeader>
@@ -19,7 +19,7 @@
     <body>
       <div>
         <head>Création d'un ODD test à partir des données du projet LostMa</head>
-        <p>Ce schéma définit une customisation TEI pour l'encodage des données contenues dans les tables 'parts' et 'witnesses'.</p>
+        <p>Ce schéma définit une customisation TEI pour l'encodage des données contenues dans la base de données Heurist.</p>
       </div>
 
       <div>
@@ -31,14 +31,14 @@
           
           <moduleRef key="core"
             include="note bibl ref title author term list item
-            relatedItem desc head p name date ptr respStmt resp"/>
+            relatedItem desc head p name date ptr respStmt resp publisher"/>
           
           <moduleRef key="header"
             include="teiHeader fileDesc titleStmt publicationStmt
             sourceDesc encodingDesc editorialDecl correction classDecl taxonomy
             category catDesc idno interpretation hyphenation normalization profileDesc xenoData
             revisionDesc change status langUsage language creation
-            principal respStmt handNote"/>
+            principal respStmt handNote funder availability licence"/>
           
           <moduleRef key="msdescription"
             include="msDesc msContents msFrag msIdentifier altIdentifier
@@ -66,8 +66,6 @@
           <!-- l'élément desc est utilisé comme un mode de description générique conforme à la TEI : indique les parents, les attributs et les enfants. -->
           <!-- l'élément remarks spécifie son utilisation vis-à-vis des données du projet : indique attribut et table de référence, explicite les choix scientifiques etc. -->
           <!-- toutes les listes de valeurs fermées et descriptions d'éléments proviennent du modèle de données publié sur https://lostma-erc.github.io/corpus/documentation/-->
-          
-
           
           <!-- TEI racine --> 
           
@@ -116,6 +114,7 @@
               <elementRef key="title" minOccurs="1" maxOccurs="1"/>
               <elementRef key="principal" minOccurs="1" maxOccurs="1"/>
               <elementRef key="respStmt" minOccurs="1" maxOccurs="unbounded"/>
+              <elementRef key="funder" minOccurs="1" maxOccurs="1"/>
             </sequence>
             </content>
             <remarks>
@@ -123,7 +122,7 @@
             </remarks>
           </elementSpec>
           
-<!--          <!-\- title -\->
+          <!-- title -->
           
           <elementSpec ident="title" mode="change">
             <desc>The element title takes an @type.</desc>
@@ -140,7 +139,7 @@
             <remarks>
               <p>The element title stores the DB's data for witness's name </p>
             </remarks>
-          </elementSpec> -->
+          </elementSpec> 
           
           <!-- principal -->
           
@@ -150,7 +149,7 @@
               <elementRef key="persName" minOccurs="1" maxOccurs="1"/>
             </content>
             <remarks>
-              <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
+              <p>Principal is hard-coded for every file with the name of Jean-Baptiste Camps.</p>
             </remarks>
           </elementSpec>
           
@@ -165,9 +164,74 @@
               </sequence>
             </content>
             <remarks>
-              <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
+              <p>Principal is hard-coded for every file with the name of Jean-Baptiste Camps.</p>
             </remarks>
           </elementSpec>
+          
+          <!-- publicationStmt -->
+          
+          <elementSpec ident="publicationStmt" mode="change">
+            <desc>The element is used to describe the publication and diffusion of the digital ressources.</desc>
+            <content>
+              <sequence>
+                <elementRef key="publisher" minOccurs="1" maxOccurs="1"/>
+                <elementRef key="date" minOccurs="0" maxOccurs="1"/> <!-- Faut-il inclure plusieurs dates pour anticiper des mises à jour ou révisions ? ou on fait ça ailleurs ? -->
+                <elementRef key="availability" minOccurs="1" maxOccurs="1"/>
+              </sequence>
+            </content>
+            <remarks>
+              <p>publicationStmt is hard-coded for every file with the data from the website https://lostma-erc.github.io/about. The publisher is ERC LostMA, the date need to change 
+                according to the publication's date and availability encodes data about the licence.</p>
+            </remarks>
+          </elementSpec>
+          
+          
+          <!-- publisher -->
+          
+          <elementSpec ident="publisher" mode="change">
+            <desc>The element is used to describe the publisher of the digital ressource.</desc>
+            <content>
+              <textNode/>
+            </content>
+            <remarks>
+              <p>The publisher element takes as sole value "ERC LostMA".</p>
+            </remarks>
+          </elementSpec>
+          
+          <!-- availability -->
+          
+          <elementSpec ident="availability" mode="change">
+            <desc>The element is used to describe the availability under which is published the digital ressource. It takes licence and p as children-elements.</desc>
+            <content>
+              <sequence>
+                <elementRef key="licence" minOccurs="1" maxOccurs="1"/>
+                <elementRef key="p" minOccurs="1" maxOccurs="1"/>
+              </sequence>
+            </content>
+            <remarks>
+              <p>The availability element is hard coded for every file with the mention of the licence CC BY 4.0</p>
+            </remarks>
+          </elementSpec>
+
+          <!-- licence -->
+          
+          <elementSpec ident="licence" mode="change">
+            <desc>The element is used to describe the licence under which is published the digital ressource. It takes the @target.</desc>
+            <content>
+              <textNode/>
+            </content>
+            <attList>
+               <attDef ident="target" mode="change" usage="rec">
+                 <datatype>
+                   <dataRef name="string"/>
+                 </datatype>
+               </attDef>
+            </attList>
+            <remarks>
+              <p>The availability element is hard coded for every file with the mention of the licence CC BY 4.0. The target attribute links the creative commons website.</p>
+            </remarks>
+          </elementSpec>
+          
           
           <!-- respStmt -->
           
@@ -180,7 +244,38 @@
               </sequence>
             </content>
             <remarks>
-              <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
+              <p>It receives metadata from Heurist - extraction to be determined, maybe we need to hard-code everything.</p>
+            </remarks>
+          </elementSpec>
+          
+          <!-- funder -->
+          
+          <elementSpec ident="funder" mode="change">
+            <desc>The element is used to describe the funding of the project. It takes orgName, note and idno as children-elements.</desc>
+            <content>
+              <sequence>
+                <elementRef key="orgName" minOccurs="1" maxOccurs="1"/>
+                <elementRef key="note" minOccurs="1" maxOccurs="unbounded"/>
+              </sequence>
+            </content>
+            <remarks>
+              <p>Funder is hard-coded for every file with the project's credits accessible on the webiste https://lostma-erc.github.io/about.</p>
+            </remarks>
+          </elementSpec>
+          
+          <!-- note -->
+          
+          <elementSpec ident="note" mode="change">
+            <desc>The element is used to receive free text specifying the funding of the project. It takes idno as child-element</desc>
+            <content>
+             <sequence>
+               <textNode/>
+               <elementRef key="idno" minOccurs="0" maxOccurs="1"/>
+             </sequence>
+            </content>
+            <remarks>
+              <p>The note element receives free-text from the legal mention on the website https://lostma-erc.github.io/about, and takes idno as child-element in order to 
+                receive the Horizon Europe ERC Grant number: 101117408. </p>
             </remarks>
           </elementSpec>
           
@@ -337,7 +432,7 @@
               </sequence>
             </content>
             <attList>
-              <attDef ident="type" mode="change" usage="req">
+              <attDef ident="type" mode="change" usage="rec">
                 <desc>The attribute type is required to indicate the witness's status described by the msDesc element.</desc>
                 <datatype>
                   <dataRef key="teidata.enumerated"/>
@@ -366,7 +461,8 @@
             </attList>
             <remarks>
               <p>The status of the witness is indicated via the @type in the msDesc element, which describes the witness. The closed list refers to the data from 
-                DB's Witness_status_witness, and the "unknown" choice has been added in order to deal with the possible nulls. </p>
+                DB's Witness_status_witness, and the "unknown" choice has been added in order to deal with the possible unknowns.
+                The attribute is recomanded but not required in order to deal with nulls.</p>
             </remarks>
           </elementSpec>
           
@@ -395,7 +491,7 @@
             <content>
               <sequence>
                 <elementRef key="settlement" minOccurs="0" maxOccurs="1"/>
-                <elementRef key="repository" minOccurs="0" maxOccurs="1"/>
+                <elementRef key="repository" minOccurs="0" maxOccurs="2"/>
                 <elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/>
                 <elementRef key="altIdentifier" minOccurs="0" maxOccurs="unbounded"/>
               </sequence>
@@ -436,40 +532,11 @@
           <elementSpec ident="repository" mode="change">
             <desc>Attribute type required for element repository, with a closed list of values.</desc>
             <attList>
-              <attDef ident="type" mode="change" usage="req">
-                <datatype>
-                  <dataRef name="string"/>
-                </datatype>
-                <valList type="closed">
-                  <valItem ident="label_name">
-                    <desc>Abbreviated/vernacular version of the name of the repository.</desc>
-                  </valItem>
-                  <valItem ident="preferred_name">
-                    <desc>Complete and official name of the repository.</desc>
-                  </valItem>
-                </valList>
-                <remarks>
-                  <p>Allows to specify the type of repository's name, equivalent to the database attributes
-                    Repo_preferred_name and Repo_label_name.</p>
-                </remarks>
-              </attDef>
-              <attDef ident="heurist_id" mode="add" usage="opt">
-                <datatype>
-                  <dataRef name="string"/>
-                </datatype>
-                <remarks>
-                  <p>Equivalent to the database attribute Repository_H-ID.</p>
-                </remarks>
-              </attDef>
-              <attDef ident="viaf" mode="add" usage="opt">
-                <datatype>
-                  <dataRef name="string"/>
-                </datatype>
-                <remarks>
-                  <p>Equivalent to the database attribute Repository_VIAF.</p>
-                </remarks>
-              </attDef>
+            <attDef ident="ref" mode="change"/>
             </attList>
+                <remarks>
+                  <p>Two repository elements are allowed in order to be equivalent to the database attributes Repo_preferred_name and Repo_label_name.</p>
+                </remarks>
           </elementSpec>
 
           <!-- collection -->
@@ -536,7 +603,7 @@
             <desc>msFrag describes a part of the witness hosted in a specific manuscript.</desc>
             <content>
               <sequence>
-                <elementRef key="msIdentifier" minOccurs="1" 
+                <elementRef key="msIdentifier" minOccurs="0" 
                   maxOccurs="1"/>
                 <elementRef key="physDesc" minOccurs="0" 
                   maxOccurs="1"/>
@@ -548,7 +615,7 @@
             </content>
             <remarks>
               <p>The number of msFrag element required is equivalent to the integer stored in the DB's Part_div_order. 
-                If value = 1, then only 1 msFrag.</p>
+                If value = 1, then only 1 msFrag. If value > 1, then as many msFrag as indicated.</p>
             </remarks>
           </elementSpec>
          
@@ -856,18 +923,9 @@
           <!-- settlement -->
           
           <elementSpec ident="settlement" mode="change">
-            <attList>
-              <attDef ident="heurist_id" mode="add" usage="opt">
-                <desc>Allows to input the Heurist ID of the settlement.</desc>
-                <datatype>
-                  <dataRef name="string"/>
-                </datatype>
-                <remarks>
-                  <p>Allows to input the Heurist identification number of the repository's settlement,
-                    equivalent to the database attribute Repository_city_H-ID.</p>
-                </remarks>
-              </attDef>
-            </attList>
+            <content>
+              <textNode/>
+            </content>
           </elementSpec>
           
           <!-- revisionDesc -->

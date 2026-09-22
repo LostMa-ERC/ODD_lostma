@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="/Users/maudmelinand/Desktop/LostMa-divers/LostMa_ODD/witness/out/witness_v3.rng" 
+<?xml-model href="/Users/maudmelinand/Desktop/LostMa-divers/LostMa_ODD/witness/out/witness.rng" 
             type="application/xml" 
             schematypens="http://relaxng.org/ns/structure/1.0"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
+            type="application/xml"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>-->
+
 
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="athis_test">
    <teiHeader>
@@ -14,20 +19,56 @@
                   <surname>Camps</surname>
                </persName>
             </principal>
-            <respStmt>
-               <resp>Editor of the French corpus</resp>
+            <respStmt>  
+               <resp>Project leader</resp>
                <persName xml:id="JBC">
                   <forename>Jean-Baptiste</forename>
                   <surname>Camps</surname>
                </persName>
             </respStmt>
             <respStmt>
-               <resp>Data curator</resp>
+               <resp>Data architect</resp>
+               <persName xml:id="KC">
+                  <forename>Kelly</forename>
+                  <surname>Christensen</surname>
+               </persName>
+            </respStmt>
+            <respStmt>
+               <resp>Data architect</resp>
                <persName xml:id="VR">
                   <forename>Virgile</forename>
                   <surname>Reignier</surname>
                </persName>
             </respStmt>
+            <respStmt>
+               <resp>Data architect</resp>
+               <persName xml:id="MM">
+                  <forename>Maud</forename>
+                  <surname>Mélinand</surname>
+               </persName>
+            </respStmt>
+            <respStmt>
+               <resp>Research engineer</resp>
+               <persName xml:id="TM">
+                  <forename>Théo</forename>
+                  <surname>Moins</surname>
+               </persName>
+            </respStmt>
+            <respStmt>
+               <resp>Research engineer</resp>
+               <persName xml:id="BH">
+                  <forename>Brenna</forename>
+                  <surname>Hensley</surname>
+               </persName>
+            </respStmt>
+            <respStmt>
+               <resp>Research engineer</resp>
+               <persName xml:id="UG">
+                  <forename>Ulysse</forename>
+                  <surname>Godreau</surname>
+               </persName>
+            </respStmt>
+            <!-- rajouter les contributeurs OpenStemmata quelque part -->
             <respStmt>
                <resp>Contributor</resp>
                <persName xml:id="EG">
@@ -35,9 +76,30 @@
                   <surname>Guidi</surname>
                </persName>
             </respStmt>
+            <respStmt>
+               <resp>Contributor</resp>
+               <persName xml:id="CV">
+                  <forename>Cecile</forename>
+                  <surname>Vermaas</surname>
+               </persName>
+            </respStmt>
+            <respStmt>
+               <resp>Contributor</resp>
+               <persName xml:id="KK">
+                  <forename>Katarzyna</forename>
+                  <surname>Kapitan</surname>
+               </persName>
+            </respStmt>
          </titleStmt>
          <publicationStmt>
-            <p>Cette publication est un test de conformité de l'ODD witness_v3.</p>
+            <publisher>ERC LostMA</publisher>
+            <date when="2026"/>
+            <availability>
+               <licence target="http://creativecommons.org/licenses/by/4.0/deed.en">
+                  CC BY 4.0
+               </licence>
+               <p>Les données sont disponibles sous licence CC BY 4.0.</p>
+            </availability>
          </publicationStmt>
          <sourceDesc>
             <msDesc type="citation">
@@ -47,7 +109,7 @@
                <msFrag>
                   <msIdentifier>
                      <settlement>Paris</settlement>
-                     <repository  ref="http://viaf.org/viaf/137156173">Bibliothèque nationale de France</repository>
+                     <repository ref="viaf">Bibliothèque nationale de France</repository>
                      <idno type="shelfmark">Latin 16433</idno>
                      <altIdentifier type="old-shelfmark">
                         <idno>Regius 1432</idno>
@@ -76,22 +138,21 @@
                      </handDesc>
                      <decoDesc>
                         <decoNote type="rubrication"></decoNote>
-                        
                      </decoDesc>
                   </physDesc>
                   <msContents>
                      <msItemStruct>
                         <locus from="12" to="23">Renvoie à part_page_ranges.</locus>
-                        <author>Chrétien de Troyes</author>
+<!--                        <author>Chrétien de Troyes</author>
                         <title>Le chevalier au lion</title>
-                        <note></note>
+                        <note></note>-->
                      </msItemStruct>
                   </msContents>
                   <additional>
                      <surrogates>
                         <bibl type="digitisation">
                            <idno type="IIIF"></idno>
-                           <ptr/>
+                           <ptr target="https://gallica.bnf.fr/ark:/12148/btv1b60006868"/>
                         </bibl>
                      </surrogates>
                   </additional>

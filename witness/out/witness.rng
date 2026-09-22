@@ -5,7 +5,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2026-06-09T09:07:49Z. . 
+Schema generated from ODD source 2026-09-22T09:37:26Z. . 
 TEI Edition: P5 Version 4.9.0. Last updated on 24th January 2025, revision f73186978 
 TEI Edition Location: https://www.tei-c.org/Vault/P5/4.9.0/ 
   
@@ -2378,16 +2378,6 @@ Sample values include: 1] all; 2] most; 3] range</a:documentation>
          <ref name="listPlace"/>
       </choice>
    </define>
-   <define name="model.publicationStmtPart.agency">
-      <notAllowed/>
-   </define>
-   <define name="model.publicationStmtPart.detail">
-      <choice>
-         <ref name="model.ptrLike"/>
-         <ref name="date"/>
-         <ref name="idno"/>
-      </choice>
-   </define>
    <define name="model.certLike">
       <notAllowed/>
    </define>
@@ -2446,6 +2436,7 @@ Sample values include: 1] all; 2] most; 3] range</a:documentation>
       <choice>
          <ref name="author"/>
          <ref name="respStmt"/>
+         <ref name="funder"/>
          <ref name="principal"/>
       </choice>
    </define>
@@ -3042,7 +3033,7 @@ Suggested values include: 1] deprecationInfo (deprecation information)</a:docume
          </pattern>
          <optional>
             <attribute name="when">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The date is expressed with YYYY or YYYY - YYYY format.</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies the value of the date or time in a standard form, e.g. yyyy-mm-dd.</a:documentation>
                <data type="string"/>
             </attribute>
          </optional>
@@ -3228,8 +3219,13 @@ Suggested values include: 1] gloss (gloss); 2] index (index); 3] instructions (i
    </define>
    <define name="note">
       <element name="note">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(note) Receives additional information as free text from the witness's status. [3.9.1. Notes and Simple Annotation 2.2.6. The Notes Statement 3.12.2.8. Notes and Statement of Language 10.3.5.4. Notes within Entries]</a:documentation>
-         <ref name="macro.specialPara"/>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(note) The element is used to receive free text specifying the funding of the project. It takes idno as child-elementReceives additional information as free text from the witness's status. [3.9.1. Notes and Simple Annotation 2.2.6. The Notes Statement 3.12.2.8. Notes and Statement of Language 10.3.5.4. Notes within Entries]</a:documentation>
+         <group>
+            <text/>
+            <optional>
+               <ref name="idno"/>
+            </optional>
+         </group>
          <ref name="att.global.attributes"/>
          <ref name="att.anchoring.attributes"/>
          <ref name="att.cmc.attributes"/>
@@ -3287,8 +3283,8 @@ Suggested values include: 1] gloss (gloss); 2] index (index); 3] instructions (i
    </define>
    <define name="title">
       <element name="title">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(title) contains a title for any kind of work. [3.12.2.2. Titles, Authors, and Editors 2.2.1. The Title Statement 2.2.5. The Series Statement]</a:documentation>
-         <ref name="macro.paraContent"/>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(title) The element title takes an @type. [3.12.2.2. Titles, Authors, and Editors 2.2.1. The Title Statement 2.2.5. The Series Statement]</a:documentation>
+         <text/>
          <ref name="att.global.attributes"/>
          <ref name="att.canonical.attributes"/>
          <ref name="att.cmc.attributes"/>
@@ -3320,6 +3316,15 @@ Sample values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] sho
                </choice>
             </attribute>
          </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="publisher">
+      <element name="publisher">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(publisher) The element is used to describe the publisher of the digital ressource. [3.12.2.4. Imprint, Size of a Document, and Reprint Information 2.2.4. Publication, Distribution, Licensing, etc.]</a:documentation>
+         <text/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.canonical.attributes"/>
          <empty/>
       </element>
    </define>
@@ -3392,8 +3397,24 @@ Sample values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] sho
             <oneOrMore>
                <ref name="respStmt"/>
             </oneOrMore>
+            <ref name="funder"/>
          </group>
          <ref name="att.global.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="funder">
+      <element name="funder">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(funding body) The element is used to describe the funding of the project. It takes orgName, note and idno as children-elements. [2.2.1. The Title Statement]</a:documentation>
+         <group>
+            <ref name="orgName"/>
+            <oneOrMore>
+               <ref name="note"/>
+            </oneOrMore>
+         </group>
+         <ref name="att.global.attributes"/>
+         <ref name="att.canonical.attributes"/>
+         <ref name="att.datable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -3409,18 +3430,14 @@ Sample values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] sho
    </define>
    <define name="publicationStmt">
       <element name="publicationStmt">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(publication statement) groups information concerning the publication or distribution of an electronic or other text. [2.2.4. Publication, Distribution, Licensing, etc. 2.2. The File Description]</a:documentation>
-         <choice>
-            <oneOrMore>
-               <ref name="model.publicationStmtPart.agency"/>
-               <zeroOrMore>
-                  <ref name="model.publicationStmtPart.detail"/>
-               </zeroOrMore>
-            </oneOrMore>
-            <oneOrMore>
-               <ref name="model.pLike"/>
-            </oneOrMore>
-         </choice>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(publication statement) The element is used to describe the publication and diffusion of the digital ressources. [2.2.4. Publication, Distribution, Licensing, etc. 2.2. The File Description]</a:documentation>
+         <group>
+            <ref name="publisher"/>
+            <optional>
+               <ref name="date"/>
+            </optional>
+            <ref name="availability"/>
+         </group>
          <ref name="att.global.attributes"/>
          <empty/>
       </element>
@@ -3466,6 +3483,48 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">OCLC control number (record number) for the union catalog record in WorldCat, a union catalog for member libraries in the Online Computer Library Center global cooperative.</a:documentation>
                   <data type="string"/>
                </choice>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="availability">
+      <element name="availability">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(availability) The element is used to describe the availability under which is published the digital ressource. It takes licence and p as children-elements. [2.2.4. Publication, Distribution, Licensing, etc.]</a:documentation>
+         <group>
+            <ref name="licence"/>
+            <ref name="p"/>
+         </group>
+         <ref name="att.global.attributes"/>
+         <ref name="att.declarable.attributes"/>
+         <optional>
+            <attribute name="status">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(status) supplies a code identifying the current availability of the text.</a:documentation>
+               <choice>
+                  <value>free</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(free) the text is freely available.</a:documentation>
+                  <value>unknown</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(unknown) the status of the text is unknown.</a:documentation>
+                  <value>restricted</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(restricted) the text is not freely available.</a:documentation>
+               </choice>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="licence">
+      <element name="licence">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The element is used to describe the licence under which is published the digital ressource. It takes the @target. [2.2.4. Publication, Distribution, Licensing, etc.]</a:documentation>
+         <text/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.datable.attributes"/>
+         <ref name="att.pointing.attribute.targetLang"/>
+         <ref name="att.pointing.attribute.evaluate"/>
+         <optional>
+            <attribute name="target">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the destination of the reference by supplying one or more URI References.</a:documentation>
+               <data type="string"/>
             </attribute>
          </optional>
          <empty/>
@@ -3928,23 +3987,25 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
          <ref name="att.docStatus.attributes"/>
          <ref name="att.sortable.attributes"/>
          <ref name="att.typed.attribute.subtype"/>
-         <attribute name="type">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The attribute type is required to indicate the witness's status described by the msDesc element.</a:documentation>
-            <choice>
-               <value>citation</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Collection of quotations, which may be in a notebook, in a margin, in another text, in a treatise, or wherever.</a:documentation>
-               <value>complete</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">All of the literary content (not including dedication, etc.) is extant and legible.</a:documentation>
-               <value>defective</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Some pages containing literary content are missing from the extant witness, but the majority or a significant portion survives.</a:documentation>
-               <value>fragmentary</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Only 1 or 2 pages are all that remain of the witness, which is expected to be much longer.</a:documentation>
-               <value>lost</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">In the case of a hypothetical witness, whose existence is posited, no part of the witness survives.</a:documentation>
-               <value>unknown</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The witness's status is unknown.</a:documentation>
-            </choice>
-         </attribute>
+         <optional>
+            <attribute name="type">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The attribute type is required to indicate the witness's status described by the msDesc element.</a:documentation>
+               <choice>
+                  <value>citation</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Collection of quotations, which may be in a notebook, in a margin, in another text, in a treatise, or wherever.</a:documentation>
+                  <value>complete</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">All of the literary content (not including dedication, etc.) is extant and legible.</a:documentation>
+                  <value>defective</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Some pages containing literary content are missing from the extant witness, but the majority or a significant portion survives.</a:documentation>
+                  <value>fragmentary</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Only 1 or 2 pages are all that remain of the witness, which is expected to be much longer.</a:documentation>
+                  <value>lost</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">In the case of a hypothetical witness, whose existence is posited, no part of the witness survives.</a:documentation>
+                  <value>unknown</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The witness's status is unknown.</a:documentation>
+               </choice>
+            </attribute>
+         </optional>
          <empty/>
       </element>
    </define>
@@ -4112,7 +4173,7 @@ Suggested values include: 1] cm (centimetres); 2] mm (millimetres); 3] in (inche
    </define>
    <define name="locus">
       <element name="locus">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(locus) locus identifies the location of the witness or witness fragment within the document. The element is equivalent to the DB's part_page_ranges. [11.3.5. References to Locations within a Manuscript]</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(locus) locus identifies the location of the witness or witness fragment within the document. [11.3.5. References to Locations within a Manuscript]</a:documentation>
          <zeroOrMore>
             <choice>
                <text/>
@@ -4190,9 +4251,17 @@ Suggested values include: 1] cm (centimetres); 2] mm (millimetres); 3] in (inche
             <optional>
                <ref name="settlement"/>
             </optional>
-            <optional>
-               <ref name="repository"/>
-            </optional>
+            <group>
+               <optional>
+                  <ref name="repository"/>
+               </optional>
+               <optional>
+                  <ref name="repository"/>
+                  <optional>
+                     <ref name="repository"/>
+                  </optional>
+               </optional>
+            </group>
             <oneOrMore>
                <ref name="idno"/>
             </oneOrMore>
@@ -4221,17 +4290,19 @@ Suggested values include: 1] cm (centimetres); 2] mm (millimetres); 3] in (inche
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(repository) Attribute type required for element repository, with a closed list of values. [11.4. The Manuscript Identifier]</a:documentation>
          <ref name="macro.phraseSeq.limited"/>
          <ref name="att.global.attributes"/>
-         <ref name="att.naming.attributes"/>
+         <ref name="att.naming.attribute.role"/>
+         <ref name="att.naming.attribute.nymRef"/>
+         <ref name="att.canonical.attribute.key"/>
          <optional>
-            <attribute name="heurist_id">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Allows to input the Heurist ID of the repository.</a:documentation>
-               <data type="string"/>
-            </attribute>
-         </optional>
-         <optional>
-            <attribute name="viaf">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Allows to input the VIAF number of the repository.</a:documentation>
-               <data type="string"/>
+            <attribute name="ref">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) provides an explicit means of locating a full definition or identity for the entity being named by means of one or more URIs.</a:documentation>
+               <list>
+                  <oneOrMore>
+                     <data type="anyURI">
+                        <param name="pattern">\S+</param>
+                     </data>
+                  </oneOrMore>
+               </list>
             </attribute>
          </optional>
          <empty/>
@@ -5103,18 +5174,12 @@ Suggested values include: 1] paper; 2] parch (parchment); 3] mixed</a:documentat
    <define name="settlement">
       <element name="settlement">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(settlement) contains the name of a settlement such as a city, town, or village identified as a single geo-political or administrative unit. [14.2.3. Place Names]</a:documentation>
-         <ref name="macro.phraseSeq"/>
+         <text/>
          <ref name="att.global.attributes"/>
          <ref name="att.cmc.attributes"/>
          <ref name="att.datable.attributes"/>
          <ref name="att.naming.attributes"/>
          <ref name="att.typed.attributes"/>
-         <optional>
-            <attribute name="heurist_id">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Allows to input the Heurist ID of the settlement.</a:documentation>
-               <data type="string"/>
-            </attribute>
-         </optional>
          <empty/>
       </element>
    </define>
@@ -5895,6 +5960,9 @@ Suggested values include: 1] d (days); 2] h (hours); 3] min (minutes); 4] s (sec
             </zeroOrMore>
             <zeroOrMore>
                <ref name="revisionDesc"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="licence"/>
             </zeroOrMore>
             <zeroOrMore>
                <ref name="model.annotationPart.body"/>

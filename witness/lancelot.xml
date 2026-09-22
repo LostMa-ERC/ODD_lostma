@@ -15,24 +15,45 @@
                     </persName>
                 </principal>
                 <respStmt>
-                    <resp>Editor of the French corpus</resp>
+                    <resp>Project's manager</resp>
                     <persName xml:id="JBC">
                         <forename>Jean-Baptiste</forename>
                         <surname>Camps</surname>
                     </persName>
                 </respStmt>
                 <respStmt>
-                    <resp>Data curator</resp>
+                    <resp>Data architect</resp>
                     <persName xml:id="VR">
                         <forename>Virgile</forename>
                         <surname>Reignier</surname>
                     </persName>
                 </respStmt>
                 <respStmt>
-                    <resp>Contributor</resp>
-                    <persName xml:id="EG">
-                        <forename>Émilie</forename>
-                        <surname>Guidi</surname>
+                    <resp>Data architect</resp>
+                    <persName xml:id="KC">
+                        <forename>Kelly</forename>
+                        <surname>Christensen</surname>
+                    </persName>
+                </respStmt>
+                <respStmt>
+                    <resp>Data architect</resp>
+                    <persName xml:id="MM">
+                        <forename>Maud</forename>
+                        <surname>Mélinand</surname>
+                    </persName>
+                </respStmt>
+                <respStmt>
+                    <resp>HTR engineer</resp>
+                    <persName xml:id="TM">
+                        <forename>Théo</forename>
+                        <surname>Moins</surname>
+                    </persName>
+                </respStmt>
+                <respStmt>
+                    <resp>HTR engineer</resp>
+                    <persName xml:id="BH">
+                        <forename>Brenna</forename>
+                        <surname>Hensley</surname>
                     </persName>
                 </respStmt>
             </titleStmt>
