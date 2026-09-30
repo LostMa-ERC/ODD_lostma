@@ -67,6 +67,10 @@
           <!-- l'élément remarks spécifie son utilisation vis-à-vis des données du projet : indique attribut et table de référence, explicite les choix scientifiques etc. -->
           <!-- toutes les listes de valeurs fermées et descriptions d'éléments proviennent du modèle de données publié sur https://lostma-erc.github.io/corpus/documentation/-->
           
+          <!-- Des modifications sont à prévoir avec l'avancement du projet : un commentaire "à reprendre" est ajouté pour chacun des éléments pour permettre de les retrouver facilement
+            et des indications spécifiques aux éléments sont données pour chacun. -->
+            
+          
           <!-- TEI racine --> 
           
           <elementSpec ident="TEI" mode="change">
@@ -91,6 +95,20 @@
           
           
           <!-- Module header -->
+          
+          <!-- teiHeader -->
+          
+          <elementSpec ident="teiHeader" mode="change">
+            <desc>The element teiHeader stores descriptive and declarative information about the digital title page at the begining of the text.</desc>
+            <content>
+              <sequence>
+                <elementRef key="fileDesc" minOccurs="1" maxOccurs="1"/>
+                <elementRef key="profileDesc" minOccurs="1" maxOccurs="1"/>
+                <elementRef key="revisionDesc" minOccurs="0" maxOccurs="1"/>
+              </sequence>
+            </content>            
+          </elementSpec>
+          
 
           <!-- fileDesc -->
 
@@ -111,16 +129,18 @@
             <desc>The element titleStmt takes a required child-element title.</desc>
             <content>
             <sequence>
-              <elementRef key="title" minOccurs="1" maxOccurs="1"/>
+              <elementRef key="title" minOccurs="1" maxOccurs="unbounded"/>
               <elementRef key="principal" minOccurs="1" maxOccurs="1"/>
               <elementRef key="respStmt" minOccurs="1" maxOccurs="unbounded"/>
               <elementRef key="funder" minOccurs="1" maxOccurs="1"/>
             </sequence>
             </content>
             <remarks>
-              <p>Title is required in order to comply to DoTS's requirements.</p>
+              <p>Title is required in order to comply to DoTS's requirements. The title element can exists 2 times because it encoded the witness's siglum and the text preferred name.</p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
+          <!-- Attention ça sera à nettoyer plus tard pour le moment c'est juste pour ajouter le titre du texte pour le XML-TEI witness qui sort de la pipeline -->
           
           <!-- title -->
           
@@ -132,7 +152,8 @@
             <attList>
               <attDef ident="type" mode="change" usage="rec">
                 <valList type="closed">
-                  <valItem ident="preferred"/>
+                  <valItem ident="text_name"/> <!-- Pour encoder le TextTable_preferred_name -->
+                  <valItem ident="witness_siglum"/> <!-- Pour encoder le Witness_preferred_siglum -->
                 </valList>
               </attDef>
             </attList>
@@ -247,6 +268,9 @@
               <p>It receives metadata from Heurist - extraction to be determined, maybe we need to hard-code everything.</p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
+          <!-- Il faudra penser à rajouter un système qui permet de donner les noms des contributeurs côté recherche en fonction des corpus. 
+            Ex : si corpus = DUM alors contributeur = Cecile Vermaas-->
           
           <!-- funder -->
           
@@ -622,7 +646,7 @@
           <!-- msContents -->
           
           <elementSpec ident="msContents" mode="change">
-            <desc>msContents is in this case solely used as a direct child of msFrag, and not msDesc.</desc>
+            <desc>msContents is in this case only used as a direct child of msFrag, and not msDesc.</desc>
             <content>
               <elementRef key="msItemStruct" minOccurs="1" maxOccurs="1"/>
             </content>
@@ -635,9 +659,9 @@
             <content>
              <sequence>
               <elementRef key="locus" minOccurs="1" maxOccurs="1"/>
-              <elementRef key="author"/>
-              <elementRef key="title"/>
-              <elementRef key="note"/>
+              <elementRef key="author" minOccurs="0" maxOccurs="unbounded"/>
+               <elementRef key="title" minOccurs="0" maxOccurs="unbounded"/>
+               <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
              </sequence>
             </content>
           </elementSpec>
@@ -678,6 +702,8 @@
               <p>The physDesc element must always be a direct child of msFrag and not msDesc, as there can be multiple parts for a witness and multiple physical documents to describe. </p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! Il faut ajouter les données dans Heurist ou aller les récupérer ailleurs -->
+          <!-- Voir note en fin de séquence : pas encore de données mais déjà prévu dans le modèle. idem pour tous les éléments enfants -->
           
           <!-- objectDesc -->
           
@@ -691,6 +717,7 @@
               </sequence>
             </content>
           </elementSpec>
+          <!-- A reprendre ! -->
           
           <!-- supportDesc -->
           
@@ -700,6 +727,7 @@
               <elementRef key="support" minOccurs="0" maxOccurs="1"/>
             </content>
            </elementSpec>
+          <!-- A reprendre ! -->
           
           <!-- support -->
           
@@ -718,8 +746,9 @@
                 data model.</p>
             </remarks>
          </elementSpec>
+          <!-- A reprendre ! -->
           
-         <!-- textNode -->
+         <!-- material -->
           
           <elementSpec ident="material" mode="change">
             <desc>Describes the material of the physical document</desc>
@@ -727,7 +756,7 @@
               <textNode/>
             </content>
           </elementSpec>
-          
+          <!-- A reprendre ! -->
           
           <!-- layoutDesc -->
           
@@ -737,6 +766,7 @@
               <elementRef key="layout" minOccurs="1" maxOccurs="1"/>
             </content>
           </elementSpec>
+          <!-- A reprendre ! -->
           
           <!-- layout -->
           
@@ -761,6 +791,7 @@
               <p>The attribute type for layout receives two values : writtenLines and columns for the data from the DB's number_of_columns and number_of_lines_in_writing_area.</p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
           
           <!-- dimensions -->
           
@@ -790,6 +821,7 @@
                 writing_surface_area_width, writing_surface_area_reference. @type leaves allows to input the data from the DB's folio_size_width, folio_size_height, folio_size_reference.</p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
           
           <!-- height -->
           
@@ -803,7 +835,9 @@
               <p>Allows to deal with the unit and estimated sizes, receives the data from the DB's estimated_folio_size_height.</p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
           
+         
           <!-- width -->
           
           <elementSpec ident="width" mode="change">
@@ -816,12 +850,14 @@
               <p>Allows to deal with the unit and estimated sizes, receives the data from the DB's estimated_folio_size_width.</p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
           
           <!-- handDesc -->
           
           <elementSpec ident="handDesc" mode="change">
             <desc>handDesc is a child of physDesc and is used to describe the different types of script within the witness. It takes one child : handNote.</desc>
           </elementSpec>
+          <!-- A reprendre ! -->
           
           <!-- handNote -->
           
@@ -846,6 +882,7 @@
               <p>handNote is used to input the DB's attributes 'script_type'band 'subscript_type'.</p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
 
 
           <!-- decoDesc -->
@@ -856,6 +893,7 @@
               <elementRef key="decoNote" minOccurs="0" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
+          <!-- A reprendre ! -->
           
           <!-- decoNote -->
           
@@ -878,7 +916,8 @@
               <p>The input data for decoDesc is equivalent to the DB's attributes has_decoration and amount_of_illustration.</p>
             </remarks>
           </elementSpec>
-          
+          <!-- Ne sert à rien pour le moment (physDesc absent des données) mais est déjà fonctionnel -->
+          <!-- A reprendre ! -->
           
           <!-- surrogates -->
 
@@ -939,6 +978,8 @@
               <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
+          <!-- Il faudra rajouter les métadonnées concernant les modifications des données et les dates, probablement à récupérer sur Heurist -->
 
 
           <!-- change --> 
@@ -960,6 +1001,8 @@
               <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
+          <!-- Même chose : emplacement prévu mais données abstentes pour le moment -->
           
           
           <!-- encodingDesc --> 
@@ -967,12 +1010,14 @@
           <elementSpec ident="encodingDesc" mode="change">
             <desc>Describes the encoding.</desc>
             <content>
-              <elementRef key="editorialDecl"/>
+              <elementRef key="editorialDecl" minOccurs="0" maxOccurs="1"/>
             </content>
             <remarks>
               <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
+          <!-- Vide pour le moment mais à conserver : peut-être rajouter des éléments de contexte sur les données du projet ? -->
           
           <!-- editorialDecl -->
           
@@ -994,6 +1039,20 @@
               <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
+          <!-- Vide pour le moment mais à conserver : concerne tous les choix éditoriaux qui concernent l'encodage du texte - peut-être utile pour une prochaine phase du projet -->
+          
+          <elementSpec ident="body" mode="change">
+            <desc>The body element contains the body of the text. </desc>
+            <content>
+              <elementRef key="p" minOccurs="1" maxOccurs="1"/>
+            </content>
+            <remarks>
+              <p>The body element will contain the result of the HTR transcription. For now it is only hosting the paragraph element in order to be valid.</p>
+            </remarks>
+          </elementSpec>
+          <!-- A reprendre ! -->
+          <!-- Vide pour le moment mais à conserver avec un p pour la validation des fichiers malgré l'absence des HTR (en cours de livraison) -->
           
           
         </schemaSpec>

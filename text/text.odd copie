@@ -4,7 +4,7 @@
   <teiHeader>
     <fileDesc>
       <titleStmt>
-        <title>ODD des données LostMA: schéma spécifique aux éléments des tables text, stemma, story, storyverse, genre. </title>
+        <title>ODD test pour la modélisation : schéma spécifique aux éléments des tables stories + witness </title>
         <author>Maud Mélinand</author>
       </titleStmt>
       <publicationStmt>
@@ -18,12 +18,12 @@
   <text>
     <body>
       <div>
-        <head>Création d'un ODD à partir des données du projet LostMA</head>
-        <p>Ce schéma définit une customisation TEI pour l'encodage des données contenues dans les tables text, stemma, story, storyverse et genre hébergées sur Heurist.</p>
+        <head>Création d'un ODD test à partir des données du projet LostMa</head>
+        <p>Ce schéma définit une customisation TEI pour l'encodage des données contenues dans les tables 'parts' et 'witnesses'.</p>
       </div>
       
       <div>
-        <schemaSpec ident="lostma_text" start="TEI">
+        <schemaSpec ident="test_lostma_text" start="TEI">
           
           <!-- Modules utilisés -->
           
@@ -75,7 +75,7 @@
            </remarks>
          </elementSpec>
           
-
+          <!-- Elements à rajouter : listWit / witness - listBibl / bibl -->
           
           <!-- Module header -->
           
@@ -168,8 +168,6 @@
               <p>This element will store Heurist metadata once extracted.</p>
             </remarks>
           </elementSpec>
-          <!-- A reprendre ! -->
-          <!-- Il faut rajouter les noms des contributeurs côté recherche par corpus -->
           
           <!-- persName -->
           
@@ -185,8 +183,6 @@
               <p>This element will store Heurist metadata once extracted.</p>
             </remarks>
           </elementSpec>
-          <!-- A reprendre ! -->
-          <!-- Idem -->
           
           <!-- respStmt -->
           
@@ -202,8 +198,6 @@
               <p>This element will store Heurist metadata once extracted.</p>
             </remarks>
           </elementSpec>
-          <!-- A reprendre ! -->
-          <!-- Idem -->
           
           <!-- sourceDesc -->
           
@@ -244,7 +238,6 @@
             </remarks>
           </elementSpec>
           
-          
           <!-- encodingDesc -->
           
           <elementSpec ident="encodingDesc" mode="change">
@@ -259,8 +252,6 @@
               anticipated.</p>
             </remarks>
           </elementSpec>
-          <!-- A reprendre ! -->
-          <!-- A reprendre et compléter lorsque les transcriptions auront été liées.  -->
           
           <!-- classDecl -->
           
@@ -286,7 +277,7 @@
               </attDef>
             </attList>
             <remarks>
-              <p>The element taxonomy is used in order to deal with a few categories that don't translate canonically in TEI.</p>
+              <p>The element taxonomy is used in order to deal with a few categories that doesn't translate canonically in TEI.</p>
               <p>The @xml:id stores the name of different taxonomies : genre, litterary forme, versification, rhymes and stanza.</p>
               <p>Each of theses categories of taxonomy can be declared one by one within their own taxonomy element.</p>
             </remarks>

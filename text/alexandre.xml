@@ -20,7 +20,7 @@
             <title type="preferred">[fragmentary] fro (Old French) Lambert le Tort, "Alexandre en Orient" (verse alexandrine full rhyme, 1165 to 1200)</title>
             <author>Lambert le Tort, 1101 - 1150 
                <note>Two dubious attributions, perhaps matching the two separate versions: Graindor de Brie 
-                  and Guillaume de Bapaume</note>
+                  and Guillaume de Bapaume.</note>
             </author>
             <!-- ajout de l'Heurist ID pour le text dans @key mais à voir si on le met ailleurs ?  -->
             <principal>
@@ -29,7 +29,7 @@
                   <surname>Camps</surname>
                </persName>
             </principal>
-            <respStmt>  <!-- rien de tout ça n'est mappé car métadonnées Heurist qui ne sont pas dans la BDD - trouver comment les récupérer  -->
+            <respStmt>  
                <resp>Editor of the French corpus</resp>
                <persName xml:id="JBC">
                   <forename>Jean-Baptiste</forename>
@@ -37,10 +37,45 @@
                </persName>
             </respStmt>
             <respStmt>
-               <resp>Data curator</resp>
+               <resp>Data architect</resp>
                <persName xml:id="VR">
                   <forename>Virgile</forename>
                   <surname>Reignier</surname>
+               </persName>
+            </respStmt>
+            <respStmt>
+               <resp>Data architect</resp>
+               <persName xml:id="KC">
+                  <forename>Kelly</forename>
+                  <surname>Christensen</surname>
+               </persName>
+            </respStmt>
+            <respStmt>
+               <resp>Data architect</resp>
+               <persName xml:id="MM">
+                  <forename>Maud</forename>
+                  <surname>Mélinand</surname>
+               </persName>
+            </respStmt>
+            <respStmt>
+               <resp>Research engineer</resp>
+               <persName xml:id="TM">
+                  <forename>Théo</forename>
+                  <surname>Moins</surname>
+               </persName>
+            </respStmt>
+            <respStmt>
+               <resp>Research engineer</resp>
+               <persName xml:id="BH">
+                  <forename>Brenna</forename>
+                  <surname>Hensley</surname>
+               </persName>
+            </respStmt>
+            <respStmt>
+               <resp>Research engineer</resp>
+               <persName xml:id="UG">
+                  <forename>Ulysse</forename>
+                  <surname>Godreau</surname>
                </persName>
             </respStmt>
             <respStmt>
@@ -50,13 +85,14 @@
                   <surname>Guidi</surname>
                </persName>
             </respStmt>
+            <!-- rajouter les contributeurs OpenStemmata quelque part -->
          </titleStmt>
-         <publicationStmt> <!-- pas d'intérêt à conserver -->
+         <publicationStmt> <!-- pas d' intérêt à conserver -->
             <p>Cette publication est un test de conformité de l'ODD text.</p>
          </publicationStmt>
          <sourceDesc>
             <p>
-               <listWit> <!-- pas mappé car impossible de trouver ces données dans la BDD ? est-ce du côté du stemma ? -->
+               <listWit> <!-- Revoir l'ODD desc et le mapping pour expliquer -->
                <witness xml:id="athis_2">"Athis et Prophilias" (1201 to 1300) p, in ms Latin 16433</witness>
                <witness xml:id="athis_3">"Athis et Prophilias" (1201 to 1300) p, in ms Latin 16433</witness>
             </listWit>

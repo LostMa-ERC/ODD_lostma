@@ -90,14 +90,18 @@
                   <surname>Kapitan</surname>
                </persName>
             </respStmt>
+            <funder>
+               <orgName>European Research Council</orgName>
+               <note>Horizon Europe ERC Grant number <idno>101117408</idno>
+               </note>
+               <note>Funded by the European Research Council. Views and opinions expressed are however those of the author(s) only and not necessarily reflect those of the European Union or the European Research Council. Neither the European Union nor the granting authority can be held responsible for them.</note>
+            </funder>
          </titleStmt>
          <publicationStmt>
             <publisher>ERC LostMA</publisher>
             <date when="2026"/>
             <availability>
-               <licence target="http://creativecommons.org/licenses/by/4.0/deed.en">
-                  CC BY 4.0
-               </licence>
+               <licence target="http://creativecommons.org/licenses/by/4.0/deed.en">CC BY 4.0</licence>
                <p>Les données sont disponibles sous licence CC BY 4.0.</p>
             </availability>
          </publicationStmt>
@@ -160,8 +164,8 @@
             </msDesc>
          </sourceDesc>
       </fileDesc>
-      <encodingDesc>
-         <editorialDecl><!-- ¨Pour prévoir l'avenir, il faudra songer à comment signaler ça, qui concerne le plein texte -->
+<!--      <encodingDesc>
+<!-\-         <editorialDecl><!-\\- ¨Pour prévoir l'avenir, il faudra songer à comment signaler ça, qui concerne le plein texte -\\->
             <correction>
                <p></p>
             </correction>
@@ -175,7 +179,7 @@
                <p></p>
             </normalization>
          </editorialDecl>
-      </encodingDesc>
+      </encodingDesc>-\->-->
       <profileDesc>
          <langUsage>
             <language ident="dum">
