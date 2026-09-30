@@ -4,5 +4,6 @@ All project data are available on the database hosted on [Heurist](https://heuri
 
 The following schema shows the first release's model and the second model based on it for the ODD. 
 
-<img width="970" height="1472" alt="modele_logique_lostma" src="https://github.com/user-attachments/assets/5631f852-fd9c-441a-ac3c-dc87f5eb63a2" />
+<img width="970" height="1472" alt="modele_logique_lostma" src="https://github.com/user-attachments/assets/e8f0f5c4-f713-485b-8e08-d938640fa5da" />
+
 <svg xmlns="http://www.w3.org/2000/svg" width="970" height="1472" viewBox="0 0 970 1472" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" xmlns:c2pa="http://c2pa.org/manifest">
