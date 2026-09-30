@@ -22,6 +22,18 @@
         <p>Ce schéma définit une customisation TEI pour l'encodage des données contenues dans les tables text, stemma, story, storyverse et genre hébergées sur Heurist.</p>
       </div>
       
+      <!-- Quelques commentaires généraux : -->
+      <!-- Tous les éléments sont déclarés via elementSpec même quand leur usage ne change pas de la TEI classique pour les besoins de la documentation -->
+      <!-- Les éléments sont déclarés dans l'ordre des modules même si notre structure de données est différente. Ex : les éléments de msIdentifier qui 
+          sont utilisés pour msFrag seulement sont déclarés dans la section msDesc-->
+      <!-- Cetains éléments de description relatifs à l'origine du témoin dans profileDesc sont déclarés dans la section consacrée au module namesdates -->
+      <!-- L'élément desc est utilisé comme un mode de description générique conforme à la TEI : indique les parents, les attributs et les enfants. -->
+      <!-- L'élément remarks spécifie son utilisation vis-à-vis des données du projet : indique attribut et table de référence, explicite les choix scientifiques etc. -->
+      <!-- Toutes les listes de valeurs fermées et descriptions d'éléments proviennent du modèle de données publié sur https://lostma-erc.github.io/corpus/documentation/-->
+      
+      <!-- Des modifications sont à prévoir avec l'avancement du projet : un commentaire "A reprendre !" est ajouté pour chacun des éléments pour permettre de les retrouver facilement
+            et des indications spécifiques aux éléments sont données pour chacun. -->
+      
       <div>
         <schemaSpec ident="lostma_text" start="TEI">
           
@@ -243,6 +255,8 @@
               witnesses a text has.</p>
             </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
+          <!-- C'est la solution envisagée mais il faut voir comment on lie ça de manière automatique dans le script de transfo. -->
           
           
           <!-- encodingDesc -->
@@ -270,6 +284,8 @@
               <elementRef key="taxonomy" minOccurs="0" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
+          <!-- A reprendre ! -->
+          <!-- Pas nécessairement à reprendre mais plutôt voir si c'est toujours la solution la plus adaptée parce que lourd visuellement et pas très lisible. -->
           
           <!-- taxonomy -->
           
@@ -317,6 +333,8 @@
             <p>For stanza : null, monoryhme, laisse. They are equivalent to the DB's TextTable_stanza_type.</p>
           </remarks>
           </elementSpec>
+          <!-- A reprendre ! -->
+          <!-- Pas nécessairement à reprendre mais plutôt voir si c'est toujours la solution la plus adaptée parce que lourd visuellement et pas très lisible. -->
 
           <!-- profileDesc -->
           
@@ -555,7 +573,7 @@
               </attDef>
             </attList>
             <remarks>
-              <p>The derivation element stores a textnode to receive TextTable_nature_of_derivations and the 
+              <p>The derivation element stores a text node to receive TextTable_nature_of_derivations and the 
                 @corresp receives TextTable_is_derived_from H-ID, and points to another text xml:id (hid_123 format).</p>
             </remarks>
           </elementSpec>
@@ -568,6 +586,7 @@
               <elementRef key="listPerson"/>
             </content>
           </elementSpec>
+         
           
           <!-- listPerson -->
           
@@ -595,6 +614,8 @@
               DB's </p>
             </remarks>
           </elementSpec>
+          <!-- A modifier ! -->
+          <!-- Décision à prendre sur l'auteur : est-ce qu'on le laisse ici ou est-ce une information à déclarer plus haut dans le header avec élément author ? -->
           
           
           <!-- body -->
@@ -605,6 +626,8 @@
               <elementRef key="graph" minOccurs="0" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
+          <!-- A modifier ! -->
+          <!-- Body a été envisagé pour ajouter le graphe stemmatologique mais pour le moment c'est une solution à peine défrichée. -->
         
         
           <!-- graph -->
@@ -631,6 +654,8 @@
             </attDef> 
           </attList>
         </elementSpec>
+        <!-- A modifier ! -->
+        <!-- Pareil -->
         
         <!-- arc -->
           
@@ -652,6 +677,8 @@
             </attDef>
           </attList>
         </elementSpec>
+        <!-- A modifier ! -->
+        <!-- Pareil -->
         
         
         </schemaSpec>
